@@ -1,0 +1,14 @@
+:root {
+
+  /* Font */
+  --defaultFont: 'Rubik', sans-serif;
+
+  /* Colors (Priority) */
+  --primary: #2BBCBC;
+  --secondary: #7460EE;
+  --tertiary: #BC712B;
+
+  /* Border radius */
+  --cornerRadius: 5px;
+  
+}

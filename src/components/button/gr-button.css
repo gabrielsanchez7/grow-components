@@ -1,0 +1,141 @@
+/* Default */
+.gr-button {
+  font-family: var(--defaultFont);
+  font-weight: 400;
+  font-size: 16px;
+  appearance: none;
+  outline: none;
+  user-select: none;
+  background-color: transparent;
+  border-radius: var(--cornerRadius);
+  overflow: hidden;
+  position: relative;
+  border: none;
+}
+
+.gr-button__background {
+  display: block;
+  position: absolute;
+  height: calc(100% - 4px);
+  width: calc(100% - 4px);
+  left: 0;
+  top: 0;
+  border: 2px solid transparent;
+  transition: 0.25s;
+  border-radius: var(--cornerRadius);
+}
+
+.gr-button__label {
+  position: relative;
+  z-index: 1;
+  transition: 0.25s;
+}
+
+/* Boxed and primary */
+.gr-button--boxed.gr-button--primary .gr-button__background {
+  background-color: var(--primary);
+}
+
+.gr-button--boxed.gr-button--primary:hover .gr-button__background {
+  filter: brightness(0.85);
+}
+
+.gr-button--boxed.gr-button--primary .gr-button__label {
+  color: white;
+}
+
+.gr-button--boxed.gr-button--primary:hover {
+  background-color: rgba(var(--primary), 0.5);
+}
+
+/* Outline and primary */
+.gr-button--outline.gr-button--primary .gr-button__background {
+  background-color: transparent;
+  border-color: var(--primary);
+}
+
+.gr-button--outline.gr-button--primary:hover .gr-button__background {
+  filter: brightness(0.85);
+}
+
+.gr-button--outline.gr-button--primary .gr-button__label {
+  color: var(--primary);
+}
+
+.gr-button--outline.gr-button--primary:hover .gr-button__label {
+  filter: brightness(0.85);
+}
+
+/* Negative and primary */
+.gr-button--negative.gr-button--primary .gr-button__background {
+  background-color: white;
+  border-color: white;
+}
+
+.gr-button--negative.gr-button--primary:hover .gr-button__background {
+  filter: brightness(0.85);
+}
+
+.gr-button--negative.gr-button--primary .gr-button__label {
+  color: var(--primary);
+}
+
+.gr-button--negative.gr-button--primary:hover .gr-button__label {
+  filter: brightness(0.85);
+}
+
+/* Inline and primary */
+.gr-button--inline.gr-button--primary {
+  height: auto;
+  padding: 5px 7px;
+}
+
+.gr-button--inline.gr-button--primary .gr-button__background {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.gr-button--inline.gr-button--primary .gr-button__label {
+  color: var(--primary);
+}
+
+.gr-button--inline.gr-button--primary:hover .gr-button__label {
+  filter: brightness(0.85);
+}
+
+/* Sizes */
+.gr-button--large {
+  height: 58px;
+  padding: 0 32px;
+}
+
+.gr-button--medium {
+  height: 48px;
+  padding: 0 26px;
+}
+
+.gr-button--small {
+  height: 38px;
+  padding: 0 20px;
+}
+
+/* Status */
+.gr-button:not(.gr-button--loading),
+.gr-button:not(.gr-button--disabled) {
+  cursor: pointer;
+}
+
+.gr-button:not(.gr-button--loading):active,
+.gr-button:not(.gr-button--disabled):active {
+  transform: scale(0.98) translateY(1px);
+}
+
+.gr-button--loading,
+.gr-button--disabled {
+  pointer-events: none;
+}
+
+/* .gr-button:not(.gr-button--loading):hover,
+.gr-button:not(.gr-button--disabled):hover {
+  
+} */
