@@ -11,6 +11,9 @@
   overflow: hidden;
   position: relative;
   border: none;
+  display: flex;
+  align-items: center;
+  gap: 7px;
 }
 
 .gr-button__background {
@@ -29,6 +32,18 @@
   position: relative;
   z-index: 1;
   transition: 0.25s;
+  font-size: var(--defaultFontSize);
+  font-weight: var(--defaultFontWeight);
+}
+
+/* Icons */
+::slotted([slot=icon]) {
+  font-size: var(--defaultIconSize);
+  position: relative;
+}
+
+.gr-button--trailing ::slotted([slot=icon]) {
+  order: 2;
 }
 
 /* Boxed and primary */
@@ -40,7 +55,8 @@
   filter: brightness(0.85);
 }
 
-.gr-button--boxed.gr-button--primary .gr-button__label {
+.gr-button--boxed.gr-button--primary .gr-button__label,
+.gr-button--boxed.gr-button--primary ::slotted([slot=icon]) {
   color: white;
 }
 
@@ -58,7 +74,8 @@
   filter: brightness(0.85);
 }
 
-.gr-button--outline.gr-button--primary .gr-button__label {
+.gr-button--outline.gr-button--primary .gr-button__label,
+.gr-button--outline.gr-button--primary ::slotted([slot=icon]) {
   color: var(--primary);
 }
 
@@ -76,7 +93,8 @@
   filter: brightness(0.85);
 }
 
-.gr-button--negative.gr-button--primary .gr-button__label {
+.gr-button--negative.gr-button--primary .gr-button__label,
+.gr-button--negative.gr-button--primary ::slotted([slot=icon]) {
   color: var(--primary);
 }
 
@@ -95,7 +113,8 @@
   border-color: transparent;
 }
 
-.gr-button--inline.gr-button--primary .gr-button__label {
+.gr-button--inline.gr-button--primary .gr-button__label,
+.gr-button--inline.gr-button--primary ::slotted([slot=icon]) {
   color: var(--primary);
 }
 

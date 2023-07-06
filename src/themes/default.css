@@ -2,6 +2,9 @@
 
   /* Font */
   --defaultFont: 'Rubik', sans-serif;
+  --defaultFontSize: 14px;
+  --defaultFontWeight: 400;
+  --defaultIconSize: 18px;
 
   /* Colors (Priority) */
   --primary: #2BBCBC;
@@ -11,4 +14,10 @@
   /* Border radius */
   --cornerRadius: 5px;
   
+}
+
+#root-inner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }

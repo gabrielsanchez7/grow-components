@@ -1,0 +1,77 @@
+import { html } from 'lit';
+import { ifDefined } from 'lit/directives/if-defined.js';
+import { styleMap } from 'lit/directives/style-map.js';
+import { unsafeHTML } from 'lit/directives/unsafe-html.js';
+import { Meta, Canvas, ArgsTable, Story } from '@storybook/addon-docs';
+import "./gr-button";
+
+<Meta
+  title="Grow/Button"
+  component="gr-button"
+  argTypes={{
+    label: {
+      control: { type: 'text' }
+    },
+    size: {
+      options: ['small', 'medium', 'large'],
+      default: 'medium',
+      control: { type: 'select' }
+    },
+    type: {
+      options: ['boxed', 'outline', 'negative', 'inline'],
+      default: 'boxed',
+      control: { type: 'select' }
+    },
+    icon: {
+      control: { type: 'text' }
+    },
+    iconPosition: {
+      options: ['leading', 'trailing', 'center'],
+      default: 'center',
+      control: 'select'
+    }
+  }}
+/>
+
+export const SingleButtonTemplate = (args) => html`<gr-button
+label="${ifDefined(args.label)}"
+size="${ifDefined(args.size)}"
+type="${ifDefined(args.type)}"
+icon-position=${ifDefined(args.iconPosition)}>${ifDefined(unsafeHTML(args.icon))}</gr-button>`
+
+export const ButtonSizes = (args) => html`
+${SingleButtonTemplate({label: 'Large button', size: 'large', ...args})}
+${SingleButtonTemplate({label: 'Medium button', size: 'medium', ...args})}
+${SingleButtonTemplate({label: 'Small button', size: 'small', ...args})}
+`
+
+export const ButtonStyles = (args) => html`
+${SingleButtonTemplate({label: 'Boxed button', type: 'boxed', ...args})}
+${SingleButtonTemplate({label: 'Outline button', type: 'outline', ...args})}
+${SingleButtonTemplate({label: 'Negative button', type: 'negative', ...args})}
+${SingleButtonTemplate({label: 'Inline button', type: 'inline', ...args})}
+`
+
+export const ButtonIcons = (args) => html`
+${SingleButtonTemplate({label: 'Leading icon', iconPosition: 'leading', icon:'<i slot="icon" class="fa-solid fa-gear"></i>', ...args})}
+${SingleButtonTemplate({label: 'Trailing icon', iconPosition: 'trailing', icon:'<i slot="icon" class="fa-solid fa-gear"></i>', ...args})}
+${SingleButtonTemplate({iconPosition: 'center', icon:'<i slot="icon" class="fa-solid fa-gear"></i>', ...args})}
+`
+
+<Canvas>
+  <Story name="Sizes">
+    {ButtonSizes.bind({})}
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name="Styles">
+    {ButtonStyles.bind({})}
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name="Icons">
+    {ButtonIcons.bind({})}
+  </Story>
+</Canvas>

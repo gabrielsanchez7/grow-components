@@ -4,7 +4,13 @@ import "./gr-button";
 export default {
   title: 'Grow/Button',
   argTypes: {
-    label: { type: 'string' }
+    label: { type: 'string' },
+    size: {
+      control: {
+        type: 'select',
+        options: ['small', 'medium', 'large']
+      }
+    }
   }
 } as Meta
 
@@ -25,8 +31,22 @@ export const Types = (args) => {
   </div>`
 }
 
+export const WithIcons = (args) => {
+  return `<div style="${flexStyles}">
+    <gr-button label="${args.label ?? "Leading icon"}">
+      <i slot="leading-icon" class="fa-solid fa-gear"></i>
+    </gr-button>
+    <gr-button label="${args.label ?? "Trailing icon"}">
+      <i slot="trailing-icon" class="fa-solid fa-gear"></i>
+    </gr-button>
+    <gr-button>
+      <i slot="icon" class="fa-solid fa-gear"></i>
+    </gr-button>
+  </div>`
+}
+
 const flexStyles = `
   display: flex;
   align-items: center;
-  gap: 15px
+  gap: 15px;
 `

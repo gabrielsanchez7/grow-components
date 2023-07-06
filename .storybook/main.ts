@@ -8,7 +8,8 @@ const config: StorybookConfig = {
   addons: [
     "@storybook/addon-links",
     "@storybook/addon-essentials",
-    "@storybook/addon-docs"
+    "@storybook/addon-docs",
+    "@storybook/addon-controls"
   ],
   framework: {
     name: "@storybook/web-components-vite",

@@ -23,20 +23,27 @@ export class GrButton extends LitElement {
   @property()
   status: 'loading' | 'disabled' | undefined
 
+  @property({attribute: 'icon-position'})
+  iconPosition: 'center' | 'leading' | 'trailing' = 'center'
+
   configClassName() {
     return modifiersToBem('button', [
       this.type,
       this.size,
       this.priority,
-      this.status
+      this.status,
+      this.iconPosition
     ])
   }
   
   render() {
+    const label = this.label && html`<span class="gr-button__label">${this.label}</span>`
+    
     return html`
       <button type="button" class="${this.configClassName()}">
         <span class="gr-button__background"></span>
-        <span class="gr-button__label">${this.label}</span>
+        <slot name="icon"></slot>
+        ${label}
       </button>
     `
   }
