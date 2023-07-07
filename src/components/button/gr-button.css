@@ -1,13 +1,13 @@
 /* Default */
 .gr-button {
-  font-family: var(--defaultFont);
+  font-family: var(--default-font);
   font-weight: 400;
   font-size: 16px;
   appearance: none;
   outline: none;
   user-select: none;
   background-color: transparent;
-  border-radius: var(--cornerRadius);
+  border-radius: var(--corner-radius);
   overflow: hidden;
   position: relative;
   border: none;
@@ -25,15 +25,15 @@
   top: 0;
   border: 2px solid transparent;
   transition: 0.25s;
-  border-radius: var(--cornerRadius);
+  border-radius: var(--corner-radius);
 }
 
 .gr-button__label {
   position: relative;
   z-index: 1;
   transition: 0.25s;
-  font-size: var(--defaultFontSize);
-  font-weight: var(--defaultFontWeight);
+  font-size: var(--default-font-size);
+  font-weight: var(--default-font-weight);
 }
 
 /* Icons */
@@ -154,7 +154,6 @@
   pointer-events: none;
 }
 
-/* .gr-button:not(.gr-button--loading):hover,
-.gr-button:not(.gr-button--disabled):hover {
-  
-} */
+.gr-button--disabled {
+  opacity: 0.4;
+}

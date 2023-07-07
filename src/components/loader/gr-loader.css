@@ -1,0 +1,29 @@
+.gr-loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gr-loader__indicator {
+  display: inline-block;
+  pointer-events: none;
+  user-select: none;
+  border-radius: 50%;
+  border-style: solid;
+  height: 20px;
+  width: 20px;
+  border-width: 3px;
+  border-style: solid;
+  border-color: var(--primary-opacity);
+  border-top-color: var(--primary);
+  animation: gr-loader-indicator linear 0.7s infinite;
+}
+
+@keyframes gr-loader-indicator {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

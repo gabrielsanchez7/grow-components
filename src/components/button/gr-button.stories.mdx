@@ -1,8 +1,7 @@
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { styleMap } from 'lit/directives/style-map.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
-import { Meta, Canvas, ArgsTable, Story } from '@storybook/addon-docs';
+import { Meta, Canvas, Story } from '@storybook/addon-docs';
 import "./gr-button";
 
 <Meta
@@ -29,33 +28,43 @@ import "./gr-button";
       options: ['leading', 'trailing', 'center'],
       default: 'center',
       control: 'select'
+    },
+    state: {
+      options: ['loading', 'disabled'],
+      control: 'select'
     }
   }}
 />
 
-export const SingleButtonTemplate = (args) => html`<gr-button
+export const ButtonTemplate = (args) => html`<gr-button
 label="${ifDefined(args.label)}"
 size="${ifDefined(args.size)}"
 type="${ifDefined(args.type)}"
+status="${ifDefined(args.status)}"
 icon-position=${ifDefined(args.iconPosition)}>${ifDefined(unsafeHTML(args.icon))}</gr-button>`
 
 export const ButtonSizes = (args) => html`
-${SingleButtonTemplate({label: 'Large button', size: 'large', ...args})}
-${SingleButtonTemplate({label: 'Medium button', size: 'medium', ...args})}
-${SingleButtonTemplate({label: 'Small button', size: 'small', ...args})}
+${ButtonTemplate({label: 'Large button', size: 'large', ...args})}
+${ButtonTemplate({label: 'Medium button', size: 'medium', ...args})}
+${ButtonTemplate({label: 'Small button', size: 'small', ...args})}
 `
 
 export const ButtonStyles = (args) => html`
-${SingleButtonTemplate({label: 'Boxed button', type: 'boxed', ...args})}
-${SingleButtonTemplate({label: 'Outline button', type: 'outline', ...args})}
-${SingleButtonTemplate({label: 'Negative button', type: 'negative', ...args})}
-${SingleButtonTemplate({label: 'Inline button', type: 'inline', ...args})}
+${ButtonTemplate({label: 'Boxed button', type: 'boxed', ...args})}
+${ButtonTemplate({label: 'Outline button', type: 'outline', ...args})}
+${ButtonTemplate({label: 'Negative button', type: 'negative', ...args})}
+${ButtonTemplate({label: 'Inline button', type: 'inline', ...args})}
 `
 
 export const ButtonIcons = (args) => html`
-${SingleButtonTemplate({label: 'Leading icon', iconPosition: 'leading', icon:'<i slot="icon" class="fa-solid fa-gear"></i>', ...args})}
-${SingleButtonTemplate({label: 'Trailing icon', iconPosition: 'trailing', icon:'<i slot="icon" class="fa-solid fa-gear"></i>', ...args})}
-${SingleButtonTemplate({iconPosition: 'center', icon:'<i slot="icon" class="fa-solid fa-gear"></i>', ...args})}
+${ButtonTemplate({label: 'Leading icon', iconPosition: 'leading', icon:'<i slot="icon" class="fa-solid fa-gear"></i>', ...args})}
+${ButtonTemplate({label: 'Trailing icon', iconPosition: 'trailing', icon:'<i slot="icon" class="fa-solid fa-gear"></i>', ...args})}
+${ButtonTemplate({iconPosition: 'center', icon:'<i slot="icon" class="fa-solid fa-gear"></i>', ...args})}
+`
+
+export const ButtonStates = (args) => html`
+${ButtonTemplate({label: 'Loading button', status: 'loading', ...args})}
+${ButtonTemplate({label: 'Disabled button', status: 'disabled', ...args})}
 `
 
 <Canvas>
@@ -73,5 +82,11 @@ ${SingleButtonTemplate({iconPosition: 'center', icon:'<i slot="icon" class="fa-s
 <Canvas>
   <Story name="Icons">
     {ButtonIcons.bind({})}
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name="States">
+    {ButtonStates.bind({})}
   </Story>
 </Canvas>

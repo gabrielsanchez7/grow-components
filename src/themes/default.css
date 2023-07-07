@@ -1,18 +1,21 @@
 :root {
 
   /* Font */
-  --defaultFont: 'Rubik', sans-serif;
-  --defaultFontSize: 14px;
-  --defaultFontWeight: 400;
+  --default-font: 'Rubik', sans-serif;
+  --default-font-size: 14px;
+  --default-font-weight: 400;
   --defaultIconSize: 18px;
 
   /* Colors (Priority) */
   --primary: #2BBCBC;
+  --primary-opacity: #2BBCBC4D;
   --secondary: #7460EE;
+  --secondary-opacity: #7460EE4D;
   --tertiary: #BC712B;
+  --tertiary-opacity: #BC712B4D;
 
   /* Border radius */
-  --cornerRadius: 5px;
+  --corner-radius: 5px;
   
 }
 

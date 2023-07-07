@@ -37,7 +37,7 @@ export class GrButton extends LitElement {
   }
   
   render() {
-    const label = this.label && html`<span class="gr-button__label">${this.label}</span>`
+    const label = (this.label && this.status != 'loading') && html`<span class="gr-button__label">${this.label}</span>`
     
     return html`
       <button type="button" class="${this.configClassName()}">
