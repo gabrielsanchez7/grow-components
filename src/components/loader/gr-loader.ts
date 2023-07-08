@@ -1,5 +1,5 @@
 import { LitElement, html, unsafeCSS } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { customElement, property, query } from "lit/decorators.js";
 import styles from './gr-loader.css?inline';
 
 @customElement('gr-loader')
@@ -16,12 +16,27 @@ export class GrLoader extends LitElement {
   @property()
   color: String | undefined
   
-  customizeStyle = () => [
-    `border-width: ${this.thickness ?? 3}px;`,
-    `height: ${this.size ?? 20}px;`,
-    `width: ${this.size ?? 20}px;`,
-    
-  ].join(' ')
+  customizeStyle() {
+    const styles = []
+
+    if(this.thickness) {
+      styles.push(`border-width: ${this.thickness}px;`)
+    }
+
+    if(this.size) {
+      styles.push(`height: ${this.size}px;`)
+      styles.push(`width: ${this.size}px;`)
+    }
+
+    if(this.color) {
+      styles.push(`border-color: ${this.color}4D;`)
+      styles.push(`border-top-color: ${this.color};`)
+    }
+
+    return styles.join(' ')
+  }
+
+  
 
   render() {
     return html`
