@@ -1,53 +1,71 @@
-import { LitElement, html, unsafeCSS } from "lit";
-import { customElement, property, query } from "lit/decorators.js";
-import styles from "./gr-button.css?inline";
-import { modifiersToBem } from "../../utilities/functions";
+import { LitElement, html, unsafeCSS } from "lit"
+import { customElement, property, query } from "lit/decorators.js"
+import styles from "./gr-button.css?inline"
+import { modifiersToBem } from "../../utilities/functions"
+import '../loader/gr-loader'
+
+export type ButtonType = 'boxed' | 'outline' | 'negative' | 'inline'
+export type ButtonSize = 'small' | 'medium' | 'large'
+export type ButtonPriority = 'primary' | 'secondary' | 'tertiary'
+export type ButtonState = 'loading' | 'disabled'
+export type ButtonIconPosition = 'leading' | 'trailing'
+export type ButtonHrefTarget = '_blank' | '_parent' | '_self' | '_top'
 
 @customElement('gr-button')
 export class GrButton extends LitElement {
 
   static styles = [unsafeCSS(styles)]
 
-  @property()
-  label: String | undefined
+  @property({type: String, reflect: true})
+  label?: string
 
-  @property()
-  type: 'boxed' | 'outline' | 'negative' | 'inline' = 'boxed'
+  @property({type: String, reflect: true})
+  type: ButtonType = 'boxed'
 
-  @property()
-  size: 'small' | 'medium' | 'large' = 'medium'
+  @property({type: String, reflect: true})
+  size: ButtonSize = 'medium'
 
-  @property()
-  priority: 'primary' | 'secondary' | 'tertiary' = 'primary'
+  @property({type: String, reflect: true})
+  priority: ButtonPriority = 'primary'
 
-  @property()
-  status: 'loading' | 'disabled' | undefined
+  @property({type: String, reflect: true})
+  state?: ButtonState
 
-  @property({attribute: 'icon-position'})
-  iconPosition: 'center' | 'leading' | 'trailing' = 'center'
+  @property({attribute: 'icon-position', type: String, reflect: true})
+  iconPosition?: ButtonIconPosition
 
+  @property({type: Boolean, reflect: true})
+  full = false
+  
+  @property({type: String, reflect: true})
+  href?: URL
+
+  @property({type: String, reflect: true})
+  target?: ButtonHrefTarget = '_self'
+  
   @query('.gr-button')
-  host: HTMLElement | undefined | null
+  host?: HTMLElement
   
   configClassName() {
     return modifiersToBem('button', [
       this.type,
       this.size,
       this.priority,
-      this.status,
-      this.iconPosition
+      this.state,
+      this.iconPosition,
+      this.full ? 'full' : ''
     ])
   }
-
+  
   _handleClick(e: MouseEvent) {
     const event = new CustomEvent('gr-click', {bubbles: true, composed: true, detail: e})
     this.dispatchEvent(event)
   }
 
   shouldUpdate(changed: any) {
-    if(changed.has('status') && this.host) {
+    if(changed.has('state') && this.state == 'loading' && this.host) {
       const sizes = this.host.getBoundingClientRect()
-      const width = sizes.width.toFixed(2)
+      const width = sizes.width
       this.host.style.width = `${width}px`
     } else {
       this.host?.style.removeProperty('width')
@@ -57,17 +75,35 @@ export class GrButton extends LitElement {
   }
   
   render() {
-    const label = (this.label && this.status != 'loading') ? html`<span class="gr-button__label">${this.label}</span>` : ''
-    const load = this.status == 'loading' ? html`<gr-loader color="#FFFFFF"></gr-loader>` : ''
+    if(this.full) {
+      Object.assign(this.style, {
+        display: 'block',
+        width: '100%'
+      })
+    }
     
-    return html`
-      <button type="button" class="${this.configClassName()}" @click=${(e: MouseEvent) => this._handleClick(e)}>
-        <span class="gr-button__background"></span>
-        <slot name="icon"></slot>
-        ${load}
-        ${label}
-      </button>
-    `
+    const label = (this.label && this.state != 'loading') ? html`<span class="gr-button__label">${this.label}</span>` : ''
+    const loaderColor = this.type != 'boxed' ? '#2BBCBC' : '#FFFFFF'
+    const load = this.state == 'loading' ? html`<gr-loader color="${loaderColor}"></gr-loader>` : ''
+
+    if(this.href) {
+      return html`
+        <a href="${this.href}" target="${this.target}" class="${this.configClassName()}">
+          <span class="gr-button__background"></span>
+          ${load}
+          ${label}
+        </a>
+      `
+    } else {
+      return html`
+        <button type="button" class="${this.configClassName()}" @click=${(e: MouseEvent) => this._handleClick(e)}>
+          <span class="gr-button__background"></span>
+          <slot name="icon"></slot>
+          ${load}
+          ${label}
+        </button>
+      `
+    }
   }
   
 }

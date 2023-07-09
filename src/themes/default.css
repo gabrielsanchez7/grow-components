@@ -24,3 +24,7 @@
   align-items: center;
   gap: 10px;
 }
+
+.docblock-argstable td {
+  vertical-align: middle !important;
+}

@@ -9,7 +9,7 @@ export function modifiersToBem(componentName: String, modifiersList: Array<Strin
     const bemModifiers: Array<String> = []
 
     modifiersList.forEach(modifier => {
-      if(modifier != undefined) {
+      if(modifier != undefined && modifier.length > 0) {
         bemModifiers.push(`gr-${componentName}--${modifier}`)
       }
     })

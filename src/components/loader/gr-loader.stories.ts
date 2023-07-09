@@ -1,13 +1,11 @@
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { unsafeHTML } from 'lit/directives/unsafe-html.js';
-import { Meta, Canvas, Story } from '@storybook/addon-docs';
+import { Meta, StoryObj } from '@storybook/web-components';
 import "./gr-loader";
 
-<Meta
-  title="Grow/Loader"
-  component="gr-loader"
-  argTypes={{
+export default {
+  title: 'Grow/Loader',
+  argTypes: {
     thickness: {
       control: { type: 'number' },
     },
@@ -17,25 +15,22 @@ import "./gr-loader";
     color: {
       control: { type: 'color' }
     }
-  }}
-  args={{
+  },
+  args: {
     thickness: 3,
     size: 20
-  }}
-/>
+  }
+} as Meta
 
-export const LoaderTemplate = (args) => html`<gr-loader
+const LoaderTemplate = (args) => html`<gr-loader
 thickness=${ifDefined(args.thickness)}
 size=${ifDefined(args.size)}
 color=${ifDefined(args.color)}
 ></gr-loader>`
 
-export const LoaderDefault = (args) => html`
+export const LoaderDefault: StoryObj = {
+  name: 'Default',
+  render: (args) => html`
 ${LoaderTemplate({thickness: args.thickness, size: args.size, color: args.color})}
-`
-
-<Canvas>
-  <Story name="Default">
-    {LoaderDefault.bind({})}
-  </Story>
-</Canvas>
+  `
+}
